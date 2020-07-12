@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Hello, World! - A-Frame</title>
-    <meta name="description" content="Hello, World! - A-Frame">
-    <script src="lib/aframe.min.js"></script>
-    <script src="components/wateroc2.js"></script>
-  </head>
-  <body>
-    <a-scene>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sky color="#ECECEC"></a-sky>
-    </a-scene>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <title>Hello, World! - A-Frame</title>
+  <meta name="description" content="Hello, World! - A-Frame">
+  <!-- <script src="lib/aframe.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1f00d0beadf87bad7d275c174616e048f8b573fc/dist/aframe-master.min.js"></script>
+  <script type="module" src="components/wateroc2.js"></script>
+</head>
+
+<body>
+  <a-scene>
+    <a-camera></a-camera>
+    <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+    <a-entity position="0 -1 -3" wateroc2></a-entity>
+    <a-sky color="#ECECEC"></a-sky>
+  </a-scene>
+</body>
+
 </html>

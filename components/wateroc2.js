@@ -1,3 +1,5 @@
+import { Ocean } from "../lib/three.js/Ocean.js";
+
 AFRAME.registerComponent('wateroc2', {
     schema: {},
     init: function () {
@@ -6,7 +8,7 @@ AFRAME.registerComponent('wateroc2', {
         var renderer = document.querySelector('a-scene').systems["renderer"];
         var camera = document.querySelector('a-camera').object3D;
         console.log("Got renderer: " + renderer); // DEBUG
-        
+
         var gsize = 512;
         var res = 1024;
         var gres = res / 2;
@@ -28,11 +30,23 @@ AFRAME.registerComponent('wateroc2', {
                 GEOMETRY_SIZE: gsize,
                 RESOLUTION: res
             });
+
+        ocean.materialOcean.uniforms["u_projectionMatrix"] = { value: camera.projectionMatrix };
+        ocean.materialOcean.uniforms["u_viewMatrix"] = { value: camera.matrixWorldInverse };
+        ocean.materialOcean.uniforms["u_cameraPosition"] = { value: camera.position };
+        scene.add(ocean.oceanMesh);
     },
     update: function () { },
     tick: function (time, timeDelta) {
         this.ocean.render(timeDelta);
-     },
+        this.ocean.overrideMaterial = this.ocean.materialOcean; // idk what this does
+        this.ocean.materialOcean.uniforms[ "u_normalMap" ].value = this.ocean.normalMapFramebuffer.texture;
+        this.ocean.materialOcean.uniforms[ "u_displacementMap" ].value = this.ocean.displacementMapFramebuffer.texture;
+        this.ocean.materialOcean.uniforms[ "u_projectionMatrix" ].value = this.camera.projectionMatrix;
+        this.ocean.materialOcean.uniforms[ "u_viewMatrix" ].value = this.camera.matrixWorldInverse;
+        this.ocean.materialOcean.uniforms[ "u_cameraPosition" ].value = this.camera.position;
+        this.ocean.materialOcean.depthTest = true;
+    },
     remove: function () { },
     pause: function () { },
     play: function () { }
