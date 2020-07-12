@@ -8,15 +8,16 @@
   <!-- TODO fix all the includes, maybe npm? -->
   <!-- <script src="lib/aframe.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1f00d0beadf87bad7d275c174616e048f8b573fc/dist/aframe-master.min.js"></script>
+  
   <script type="module" src="components/water.js"></script>
   <script type="module">
     // create and deferred components, because JS sucks
-    AFRAME.scenes[0].setAttribute('water','sunColor: 0xffdf00, waterColor');    
+    AFRAME.scenes[0].setAttribute('water','sunColor: 0xffdf00; waterColor: 0x000fff');    
   </script>
 </head>
 
 <body>
-  <a-scene fog>
+  <a-scene fog="color: #09c; type: linear; near: 0; far: 50" renderer="antialias: true">
     <!-- player setup -->
     <a-camera look-controls position="0 1.6 0"></a-camera>
     <a-entity id="leftHand" hand-controls="hand: left; handModelStyle: highPoly ; color: #ffcccc"></a-entity>
@@ -27,7 +28,10 @@
 
 
     <!-- misc -->
-    <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+    <a-box position="-1 0.5 -5" rotation="0 45 0" color="#FFC300"></a-box>
+    <a-box position="-5 1.5 -15" rotation="0 45 0" color="#FFC300"></a-box>
+    <a-box position="10 1.5 -25" rotation="0 45 0" color="#FFC300"></a-box>
+
   </a-scene>
 </body>
 

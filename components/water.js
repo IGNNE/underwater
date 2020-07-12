@@ -29,6 +29,7 @@ AFRAME.registerComponent('water', {
                 fog: scene.fog !== undefined
             }
         );
+        // flip the "surface" -> TODO 
         this.water.rotation.x = - Math.PI / 2;
         scene.add(this.water);
     },
