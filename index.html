@@ -3,34 +3,59 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Hello, World! - A-Frame</title>
-  <meta name="description" content="Hello, World! - A-Frame">
+  <title>Underwater</title>
+  <meta name="description" content="Underwater">
   <!-- TODO fix all the includes, maybe npm? -->
   <!-- <script src="lib/aframe.min.js"></script> -->
-  <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1f00d0beadf87bad7d275c174616e048f8b573fc/dist/aframe-master.min.js"></script>
-  
+  <script
+    src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1f00d0beadf87bad7d275c174616e048f8b573fc/dist/aframe-master.min.js"></script>
+  <script
+    src="https://unpkg.com/aframe-terrain-model-component@1.0.1/dist/aframe-terrain-model-component.min.js"></script>
+  <script
+    src="https://unpkg.com/aframe-thumb-controls-component@1.1.0/dist/aframe-thumb-controls-component.min.js"></script>
   <script type="module" src="components/water.js"></script>
   <script type="module">
     // create and deferred components, because JS sucks
-    AFRAME.scenes[0].setAttribute('water','sunColor: 0xffdf00; waterColor: 0x000fff');    
+    let waterColor = 0x0050A0;
+    let sunColor = 0xFFF000;
+    AFRAME.scenes[0].setAttribute("water", "sunColor: " + sunColor + "; waterColor: " + waterColor);    
   </script>
 </head>
 
 <body>
-  <a-scene fog="color: #09c; type: linear; near: 0; far: 50" renderer="antialias: true">
+  <a-scene fog="color: #05a; type: exponential; density: 0.07" renderer="antialias: true; physicallyCorrectLights: true;">
+
+    <!-- assets -->
+    <a-assets>
+      <!-- TODO better -->
+      <a-mixin id="softSway" animation="property: rotation; from: 0 0 -5; to: 0 0 5; dur: 6000; dir: alternate; easing: linear; loop: true;"></a-mixin>
+    </a-assets>
+
     <!-- player setup -->
-    <a-camera look-controls position="0 1.6 0"></a-camera>
-    <a-entity id="leftHand" hand-controls="hand: left; handModelStyle: highPoly ; color: #ffcccc"></a-entity>
-    <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: highPoly ; color: #ffcccc"></a-entity>
+    <a-entity id="rig" position="0 -3 0">
+      <a-camera position="0 1.6 0"></a-camera>
+    </a-entity>
+    <a-entity id="leftHand" hand-controls="hand: left; handModelStyle: highPoly ; color: #0070D0"
+      thumb-controls></a-entity>
+    <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: highPoly ; color: #0070D0"
+      thumb-controls></a-entity>
 
     <!-- world setup -->
     <a-sky color="#ECECEC"></a-sky>
-
+    <a-entity terrain-model="
+      dem: url(textures/jotunheimen.bin);
+      map: url(textures/jotunheimen-texture.jpg);
+      planeWidth: 100;
+      planeHeight: 100;
+      segmentsWidth: 199;
+      segmentsHeight: 199;
+      zPosition: 7" position="0 -15 0">
+    </a-entity> 
 
     <!-- misc -->
-    <a-box position="-1 0.5 -5" rotation="0 45 0" color="#FFC300"></a-box>
-    <a-box position="-5 1.5 -15" rotation="0 45 0" color="#FFC300"></a-box>
-    <a-box position="10 1.5 -25" rotation="0 45 0" color="#FFC300"></a-box>
+    <a-box mixin="softSway" position="-1 0.3 -5" rotation="0 0 0" color="#FFC300"></a-box>
+    <a-box mixin="softSway" position="-5 -1.5 -15" rotation="0 0 0" color="#FFC300"></a-box>
+    <a-box mixin="softSway" position="10 -1.5 -25" rotation="0 0 0" color="#FFC300"></a-box>
 
   </a-scene>
 </body>

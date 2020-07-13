@@ -3,8 +3,8 @@ import { Water } from '../lib/three.js/Water.js';
 AFRAME.registerComponent('water', {
     water: null,
     schema: {
-        waterColor: {type: 'int', default: 0x001e0f},
-        sunColor: {type: 'int', default: 0xffffff}
+        waterColor: {type: 'int', default: 0x001E0F},
+        sunColor: {type: 'int', default: 0xFFFFFF}
     },
     init: function () {
         // get basic elements for three.js
@@ -21,16 +21,15 @@ AFRAME.registerComponent('water', {
                 waterNormals: new THREE.TextureLoader().load('textures/waternormals.jpg', function (texture) {
                     texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
                 }),
-                alpha: 1.0,
-                sunDirection: new THREE.Vector3(),
+                alpha: 0.98,
                 sunColor: this.data.sunColor,
                 waterColor: this.data.waterColor,
-                distortionScale: 1.0,
+                distortionScale: 3,
                 fog: scene.fog !== undefined
             }
         );
         // flip the "surface" -> TODO 
-        this.water.rotation.x = - Math.PI / 2;
+        this.water.rotation.x = Math.PI / 2;
         scene.add(this.water);
     },
     update: function () {
