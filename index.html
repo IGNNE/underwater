@@ -15,6 +15,7 @@
   <script src="lib/SPE.js"></script>
   <script src="lib/aframe-particle-system-component.js"></script>
   <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
   <script type="module" src="components/water.js"></script>
   <script type="module">
     // create deferred components, because JS sucks
@@ -34,11 +35,14 @@
       <a-mixin id="softSway"
         animation="property: rotation; from: 0 0 -5; to: 0 0 5; dur: 6000; dir: alternate; easing: linear; loop: true;">
       </a-mixin>
+      <a-mixin id="lessSoftSway"
+        animation="property: rotation; from: 0 -7 -7; to: 0 7 7; dur: 6000; dir: alternate; easing: linear; loop: true;">
+      </a-mixin>
     </a-assets>
 
     <!-- player setup -->
     <!-- TODO fix movement controls, why do my hands not render? -->
-    <a-entity id="rig" position="0 -3 0" movement-controls>
+    <a-entity id="rig" position="0 -3 0" movement-controls="fly: true">
       <a-camera position="0 1.6 0"></a-camera>
     </a-entity>
     <a-entity id="leftHand" hand-controls="hand: left; handModelStyle: highPoly ; color: #0070D0"></a-entity>
@@ -46,6 +50,7 @@
 
 
     <!-- world setup -->
+    <!-- TODO add cannon.js physics, including collision detection -->
     <a-sky color="#ECECEC"></a-sky>
     <!-- TODO replace -->
     <a-entity terrain-model="
@@ -64,6 +69,9 @@
     <a-box mixin="softSway" position="-1 0.3 -5" rotation="0 0 0" color="#FFC300"></a-box>
     <a-box mixin="softSway" position="-5 -1.5 -15" rotation="0 0 0" color="#FFC300"></a-box>
     <a-box mixin="softSway" position="10 -1.5 -25" rotation="0 0 0" color="#FFC300"></a-box>
+    <a-gltf-model src="textures/BarramundiFish.glb" position="-2 -0.5 -5" look-at="[camera]"></a-gltf-model>
+    <a-gltf-model src="textures/BarramundiFish.glb" position="-2.2 -0.5 -5.2" look-at="[camera]"></a-gltf-model>
+    <a-gltf-model src="textures/BarramundiFish.glb" position="-1.8 -0.5 -5.4" look-at="[camera]"></a-gltf-model>
 
   </a-scene>
 </body>
