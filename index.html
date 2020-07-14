@@ -12,9 +12,12 @@
   <script
     src="https://unpkg.com/aframe-terrain-model-component@1.0.1/dist/aframe-terrain-model-component.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+  <script src="lib/SPE.js"></script>
+  <script src="lib/aframe-particle-system-component.js"></script>
+  <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
   <script type="module" src="components/water.js"></script>
   <script type="module">
-    // create and deferred components, because JS sucks
+    // create deferred components, because JS sucks
     let waterColor = 0x0050A0;
     let sunColor = 0xFFF000;
     AFRAME.scenes[0].setAttribute("water", "sunColor: " + sunColor + "; waterColor: " + waterColor);    
@@ -22,7 +25,7 @@
 </head>
 
 <body>
-  <a-scene fog="color: #05a; type: exponential; density: 0.07"
+  <a-scene fog="color: #05A; type: exponential; density: 0.07"
     renderer="antialias: true; physicallyCorrectLights: true;">
 
     <!-- assets -->
@@ -54,7 +57,9 @@
       segmentsHeight: 199;
       zPosition: 7" position="0 -15 0">
     </a-entity>
-
+    <!-- particles are broken, idk why -->
+    <a-entity position="0 -5 0" particle-system="preset: dust; color: #333; particleCount: 300; size: 0.3"></a-entity>
+    
     <!-- misc -->
     <a-box mixin="softSway" position="-1 0.3 -5" rotation="0 0 0" color="#FFC300"></a-box>
     <a-box mixin="softSway" position="-5 -1.5 -15" rotation="0 0 0" color="#FFC300"></a-box>

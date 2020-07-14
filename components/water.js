@@ -29,7 +29,7 @@ AFRAME.registerComponent('water', {
                 alpha: 0.98,
                 sunColor: this.data.sunColor,
                 waterColor: this.data.waterColor,
-                distortionScale: 3,
+                distortionScale: 2,
                 fog: scene.fog !== undefined
             }
         );
